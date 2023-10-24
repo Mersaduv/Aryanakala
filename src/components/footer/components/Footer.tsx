@@ -1,40 +1,130 @@
-import React from "react";
-import { PiBowlFoodFill } from "react-icons/pi";
-import FooterLink from "./FooterLink";
-import { BsClockHistory } from "react-icons/bs";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import { Box, Container, Fab, Grid, Typography, Zoom } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { useCallback } from "react";
+import MediaLinks from "./MediaLinks";
 
 const Footer = () => {
-	return (
-		<footer className="w-full mt-[4rem]">
-			<div className="bg-dark flex items-center flex-col lg:flex-row mx-auto gap-8 lg:gap-2 container h-full py-12 lg:py-16 rounded-t-3xl [&>:not(:first-child)]:pr-2 md:[&>:not(:first-child)]:pr-4">
-				<div className="flex w-11/12 mr-auto lg:w-4/12 h-[50px] items-center gap-1 bg-secondaryDark py-2 px-1 rounded-r-full">
-					<div className="flex justify-center items-center gap-2 text-white">
-						<PiBowlFoodFill className="text-4xl lg:text-4xl" />
-						<h2 className="text-xs md:text-lg lg:text-xl font-semibold uppercase">
-							flying food
-						</h2>
-					</div>
-				</div>
-				<ul className="w-full lg:w-8/12 text-center text-sm md:text-lg text-gray-200 uppercase grid justify-center gap-x-2 md:gap-x-4 gap-y-2 grid-cols-4">
-					<FooterLink name="Home" href="/" />
-					<FooterLink name="Cart" href="/cart" />
-					<FooterLink name="Wishlist" href="/wishlist" />
-					<FooterLink name="Categories" href="/categories" />
-					<FooterLink name="Home" href="home" />
-					<FooterLink name="Delivery" href="/delivery" />
-					<FooterLink name="Payment" href="/payment" />
-					<FooterLink name="Menu" href="/menu" />
-				</ul>
-				<div className="w-full lg:w-4/12 flex items-center justify-center lg:justify-start gap-4 text-gray-200 font-semibold text-xs md:text-sm">
-					<BsClockHistory className="text-gray-400 text-4xl" />
-					<p className="uppercase">
-						working hours
-						<span className="block">08:00 23:00</span>
-					</p>
-				</div>
-			</div>
-		</footer>
-	);
+  const trigger = useScrollTrigger({
+    threshold: 300,
+    disableHysteresis: true,
+  });
+
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  const themePage = useTheme();
+  const isMobile = useMediaQuery(themePage.breakpoints.down("md"));
+
+  return (
+    <footer>
+      <Box bgcolor={"#232F3E"}>
+        <Container maxWidth={"xl"} sx={{ pb: 10 }}>
+          <Grid container>
+            {" "}
+            <Zoom in={trigger}>
+              <Box
+                role="presentation"
+                sx={{
+                  position: "fixed",
+                  bottom: isMobile ? 70 : 32,
+                  right: isMobile ? 15 : 32,
+                  zIndex: 2,
+                }}
+              >
+                <Fab
+                  onClick={scrollToTop}
+                  color="primary"
+                  size="small"
+                  aria-label="Scroll back to top"
+                >
+                  <KeyboardArrowUpIcon fontSize="medium" />
+                </Fab>
+              </Box>
+            </Zoom>
+          </Grid>
+          <Grid
+            container
+            display={"flex"}
+            justifyContent={"center"}
+            columnSpacing={isMobile ? 2 : 20}
+            mt={3}
+            bgcolor={"#232F3E"}
+            color={"#c3c3c3"}
+            pt={2}
+          >
+            <Grid item>
+              <Box
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <Typography variant="h5" color={"#fff"} mb={2}>
+                  Social Media
+                </Typography>
+                <Box
+                  display={"flex"}
+                  flexDirection={"column"}
+                  alignItems={"start"}
+                >
+                  <MediaLinks
+                    href="https://github.com/mersaduv"
+                    name="GitHub"
+                    icon={<GitHubIcon sx={{ mr: 1 }} />}
+                  />
+                  <MediaLinks
+                    href="https://www.linkedin.com/in/mersad-karimi/"
+                    name="LinkedIn"
+                    icon={<LinkedInIcon sx={{ mr: 1 }} />}
+                  />
+                  <MediaLinks
+                    href="https://twitter.com/mersadkarimian"
+                    name="Twitter"
+                    icon={<TwitterIcon sx={{ mr: 1 }} />}
+                  />
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item>
+              <Box
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <Typography variant="h5" color={"#fff"} mb={2}>
+                  درباره ما
+                </Typography>
+                <MediaLinks href="/about" name={"بیشتر...."} />
+                <Typography>تماس با ما</Typography>
+              </Box>
+            </Grid>
+            <Grid item>
+              <Box
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <Typography variant="h5" color={"#fff"} mb={2}>
+                  پشتیبانی
+                </Typography>
+                <MediaLinks href="/" name="FAQ" />
+                <MediaLinks href="/" name="محفوظ" />
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </footer>
+  );
 };
 
 export default Footer;

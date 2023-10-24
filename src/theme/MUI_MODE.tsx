@@ -2,7 +2,6 @@
 
 import { createTheme, ThemeProvider } from "@mui/material";
 import { createContext, useMemo, useState } from "react";
-
 export const ColorModeContext = createContext({
   toggleMode: () => {},
   mode: "light",
@@ -26,6 +25,16 @@ export const ColorContextProvider = ({
   );
 
   const theme = createTheme({
+    typography: {
+      fontFamily: "hamishe",
+    },
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          fontFamily: "hamishe",
+        },
+      },
+    },
     breakpoints: {
       values: {
         xs: 0,
@@ -39,7 +48,7 @@ export const ColorContextProvider = ({
       mode: mode,
 
       primary: {
-        main: mode === "light" ? "#000000" : "#ffffff",
+        main: mode === "light" ? "#fafafa" : "#ffffff",
       },
 
       secondary: {

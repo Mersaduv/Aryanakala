@@ -1,0 +1,20 @@
+{
+    "products":[
+        {
+            "id": "1",
+            "title":"IPhone 15",
+            "slug": "iphone-15",
+            "price": 1600000,
+            "description": "توضیحات محصول",
+            "discount": 10,
+            "images":"آدرس تصاویر",
+            "sizes": [],
+            "colors": [],
+            "category": [],
+            "inStock": 1,
+            "sold": 1,
+            "info": [],
+            "rating": 2
+        }
+    ]
+}

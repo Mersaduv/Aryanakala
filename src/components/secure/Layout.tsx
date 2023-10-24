@@ -7,27 +7,21 @@ const Footer = lazy(() => import("../footer/components/Footer"));
 const Loader = lazy(() => import("../common/loading/Loader"));
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [user, setUser] = useState<boolean | null>(null);
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
   return (
-    <>
+    <Box
+      sx={{
+        height: "100%",
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection: "column",
+      }}
+    >
       <Navbar />
-      <Box>
-        {/* <Aside /> */}
-        <Box>
-          <main>
-            {/* <Basket /> */}
-            {children}
-          </main>
-          <Footer />
-        </Box>
+      <Box component="div" style={{ height: "400px" }}>
+        <div>{children}</div>
       </Box>
-    </>
+      <Footer />
+    </Box>
   );
 };
 
